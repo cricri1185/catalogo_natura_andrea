@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Catálogo Natura — Belleza y Bienestar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#FFFFFF;
+    --bg-soft:#F7F7F7;
+    --ink:#000000;
+    --ink-soft:#333333;
+    --accent-orange:#FF6A3D;
+    --accent-coral:#FF5C5C;
+
+    /* Premium: Ilía / Essencial / Homem / Kaiak */
+    --premium-bg:#F3EDE7;
+    --premium-accent:#B08D57;
+    --premium-dark:#1A1A1A;
+    --premium-rose:#C9A9A6;
+
+    /* Diaria / Juvenil: Tododia */
+    --daily-pink:#F7C6CE;
+    --daily-sky:#C6E2F0;
+    --daily-green:#CDE7C9;
+    --daily-orange:#FBD8B0;
+
+    /* Infantil: Naturé */
+    --kids-mint:#CFEEE7;
+    --kids-cream:#FBF3E7;
+    --kids-yellow:#FCEBB0;
+  }
+
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{
+    font-family:'Poppins', sans-serif;
+    background:var(--bg);
+    color:var(--ink-soft);
+    -webkit-font-smoothing:antialiased;
+  }
+
+  .display{ font-family:'Playfair Display', serif; }
+
+  /* ===== PORTADA ===== */
+  .cover{
+    min-height:70vh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    background:linear-gradient(180deg, #FFFFFF 0%, #F7F7F7 100%);
+    padding:80px 24px;
+  }
+  .cover .eyebrow{
+    letter-spacing:.35em;
+    font-size:12px;
+    font-weight:600;
+    color:var(--accent-orange);
+    text-transform:uppercase;
+    margin-bottom:18px;
+  }
+  .cover h1{
+    font-size:clamp(40px,7vw,84px);
+    font-weight:400;
+    font-style:italic;
+    color:var(--ink);
+    line-height:1.05;
+  }
+  .cover p{
+    margin-top:22px;
+    font-size:16px;
+    color:var(--ink-soft);
+    max-width:420px;
+  }
+
+  /* ===== CINTILLO DE CATEGORÍA ===== */
+  .category{
+    padding:64px 6vw 24px;
+  }
+  .category-band{
+    display:flex;
+    align-items:baseline;
+    gap:16px;
+    border-bottom:2px solid var(--ink);
+    padding-bottom:14px;
+    margin-bottom:40px;
+  }
+  .category-band .num{
+    font-family:'Playfair Display', serif;
+    font-style:italic;
+    font-size:22px;
+    color:var(--accent-orange);
+  }
+  .category-band h2{
+    font-size:clamp(22px,3vw,32px);
+    letter-spacing:.06em;
+    text-transform:uppercase;
+    font-weight:700;
+    color:var(--ink);
+  }
+  .category-band .count{
+    margin-left:auto;
+    font-size:12px;
+    color:#999;
+    letter-spacing:.1em;
+  }
+
+  /* ===== GRID DE PRODUCTOS ===== */
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill, minmax(230px,1fr));
+    gap:28px;
+    padding-bottom:16px;
+  }
+
+  .card{
+    background:var(--bg-soft);
+    border-radius:2px;
+    overflow:hidden;
+    display:flex;
+    flex-direction:column;
+    transition:transform .25s ease, box-shadow .25s ease;
+    position:relative;
+  }
+  .card:hover{
+    transform:translateY(-4px);
+    box-shadow:0 14px 30px rgba(0,0,0,.08);
+  }
+
+  .card .badge{
+    position:absolute;
+    top:12px; left:12px;
+    background:var(--accent-coral);
+    color:#fff;
+    font-size:10px;
+    font-weight:700;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    padding:5px 10px;
+    border-radius:2px;
+    z-index:2;
+  }
+
+  .card .photo{
+    background:#fff;
+    aspect-ratio:1/1;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:18px;
+  }
+  .card .photo img{
+    max-width:100%;
+    max-height:100%;
+    object-fit:contain;
+    mix-blend-mode:multiply;
+  }
+
+  .card .info{
+    padding:18px 18px 20px;
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+    flex:1;
+  }
+  .card .line-tag{
+    font-size:10px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    font-weight:600;
+    color:var(--accent-orange);
+  }
+  .card h3{
+    font-size:17px;
+    font-weight:600;
+    color:var(--ink);
+    line-height:1.25;
+  }
+  .card .desc{
+    font-size:12px;
+    color:#666;
+    line-height:1.4;
+    flex:1;
+  }
+
+  .price-row{
+    margin-top:10px;
+    display:flex;
+    align-items:baseline;
+    gap:8px;
+  }
+  .price-row .price{
+    font-size:22px;
+    font-weight:800;
+    color:var(--ink);
+  }
+  .price-row .price small{
+    font-size:12px;
+    font-weight:500;
+  }
+  .price-row .to-confirm{
+    font-size:13px;
+    font-style:italic;
+    color:#999;
+  }
+  .content{
+    font-size:11px;
+    color:#999;
+    letter-spacing:.04em;
+    margin-top:2px;
+  }
+
+  /* Paletas por sección */
+  .section-premium .category-band{border-color:var(--premium-dark);}
+  .section-premium .card{background:var(--premium-bg);}
+  .section-premium .line-tag{color:var(--premium-accent);}
+  .section-premium .card:hover{box-shadow:0 14px 30px rgba(176,141,87,.18);}
+
+  .section-daily .card:nth-child(4n+1){background:var(--daily-pink);}
+  .section-daily .card:nth-child(4n+2){background:var(--daily-sky);}
+  .section-daily .card:nth-child(4n+3){background:var(--daily-green);}
+  .section-daily .card:nth-child(4n+4){background:var(--daily-orange);}
+  .section-daily .line-tag{color:#B5546E;}
+
+  .section-kids .card:nth-child(3n+1){background:var(--kids-mint);}
+  .section-kids .card:nth-child(3n+2){background:var(--kids-cream);}
+  .section-kids .card:nth-child(3n+3){background:var(--kids-yellow);}
+  .section-kids .line-tag{color:#3F9C8B;}
+
+  .section-gift .card{background:var(--daily-pink);}
+
+  footer{
+    text-align:center;
+    padding:60px 24px;
+    color:#999;
+    font-size:12px;
+    letter-spacing:.08em;
+  }
+
+  @media (max-width:640px){
+    .category{padding:40px 5vw 16px;}
+    .grid{grid-template-columns:repeat(auto-fill, minmax(150px,1fr)); gap:16px;}
+    .card h3{font-size:15px;}
+    .price-row .price{font-size:18px;}
+  }
+</style>
+</head>
+<body>
+
+<section class="cover">
+  <div class="eyebrow">Campaña · Belleza & Bienestar</div>
+  <h1 class="display">hace bien,<br>estar bien</h1>
+  <p>Una selección de perfumería, cuidado personal y maquillaje para sentirte tú, todos los días.</p>
+</section>
+
+<!-- 1. PERFUMERÍA -->
+<section class="category section-premium">
+  <div class="category-band">
+    <span class="num">01</span>
+    <h2>Perfumería</h2>
+    <span class="count">9 productos</span>
+  </div>
+  <div class="grid">
+
+    <div class="card">
+      <div class="photo"><img src="fotos/kaiak.jpg" alt="Kaiak"></div>
+      <div class="info">
+        <span class="line-tag">Natura · Kaiak</span>
+        <h3>Kaiak Eau de Toilette</h3>
+        <p class="desc">Fragancia masculina acuática y fresca.</p>
+        <div class="content">100 ml</div>
+        <div class="price-row"><span class="price">S/ 80<small>.00</small></span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="photo"><img src="fotos/essencial-exclusivo.jpg" alt="Essencial Exclusivo"></div>
+      <div class="info">
+        <span class="line-tag">Natura · Essencial</span>
+        <h3>Essencial Exclusivo Masculino</h3>
+        <p class="desc">Perfume intenso y sofisticado para él.</p>
+        <div class="content">100 ml</div>
+        <div class="price-row"><span class="price">S/ 160<small>.00</small></span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="photo"><img src="fotos/homem-coragio.jpg" alt="Homem Coragio"></div>
+      <div class="info">
+        <span class="line-tag">Natura · Homem</span>
+        <h3>Homem Cor.Agio</h3>
+        <p class="desc">Notas amaderadas con carácter y fuerza.</p>
+        <div class="content">100 ml</div>
+        <div class="price-row"><span class="price">S/ 140<small>.00</small></span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="photo"><img src="fotos/homem-identidad.jpg" alt="Homem Identidad"></div>
+      <div class="info">
+        <span class="line-tag">Natura · Homem</span>
+        <h3>Homem Identidad</h3>
+        <p class="desc">Fragancia masculina de carácter definido.</p>
+        <div class="content">100 ml</div>
+        <div class="price-row"><span class="price">S/ 146<small>.00</small></span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="photo"><img src="fotos/ilia.jpg" alt="Ilía"></div>
+      <div class="info">
+        <span class="line-tag">Natura · Ilía</span>
+        <h3>Ilía Eau de Parfum</h3>
+        <p class="desc">Floral elegante para el día a día.</p>
+        <div class="content">50 ml</div>
+        <div class="price-row"><span class="price">S/ 120<small>.00</small></span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="photo"><img src="fotos/essencial-mirra.jpg" alt="Essencial Mirra"></div>
+      <div class="info">
+        <span class="line-tag">Natura · Essencial</span>
+        <h3>Essencial Mirra Femenino</h3>
+        <p class="desc">Cálido y envolvente, con fondo de mirra.</p>
+        <div class="content">50 ml</div>
+        <div class="price-row"><span class="price">S/ 150<small>.00</small></span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="photo"><img src="fotos/humor.jpg" alt="Meu Primeiro Humor"></div>
+      <div class="info">
+        <span class="line-tag">Natura · Humor</span>
+        <h3>Meu Primeiro Humor</h3>
+        <p class="desc">Fresco y juvenil, para las primeras mariposas.</p>
+        <div class="content">75 ml</div>
+        <div class="price-row"><span class="price">S/ 96<small>.00</small></span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="photo"><img src="fotos/kaiak-pack.jpg" alt="Kit Especial Kaiak"></div>
+      <div class="info">
+        <span class="line-tag">Natura · Kaiak</span>
+        <h3>Kit Especial Kaiak</h3>
+        <p class="desc">Perfume 25ml + shampoo 50ml + gel 2 en 1.</p>
+        <div class="content">Set de 3 piezas</div>
+        <div class="price-row"><span class="price">S/ 75<small>.00</small></span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="photo"><img src="fotos/far-away.jpg" alt="Far Away"></div>
+      <div class="info">
+        <span class="line-tag">Avon · Far Away</span>
+        <h3>Far Away Perfume</h3>
+        <p class="desc">Un clásico floral-oriental femenino.</p>
+        <div class="content">50 ml</div>
+        <div class="price-row"><span class="price">S/ 30<small>.00</small></span></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- 2. CUIDADO CORPORAL -->
+<section class="category section-daily">
+  <div class="category-band">
+    <span class="num">02</span>
+    <h2>Cuidado Corporal</h2>
+    <span class="count">2 productos</span>
+  </div>
+  <div class="grid">
+
+    <div class="card">
+      <div class="photo"><img src="fotos/tododia-algodon.jpg" alt="Tododia Algodón"></div>
+      <div class="info">
+        <span class="line-tag">Natura · Tododia</span>
+        <h3>Crema para el Cuerpo Algodón</h3>
+        <p class="desc">Nutrición prebiótica que se adapta a tu piel.</p>
+        <div class="content">400 ml</div>
+        <div class="price-row"><span class="price">S/ 45<small>.00</small></span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="photo"><img src="fotos/tododia-cereza-avellana.jpg" alt="Tododia Cereza y Avellana"></div>
+      <div class="info">
+        <span class="line-tag">Natura · Tododia</span>
+        <h3>Crema para el Cuerpo Cereza y Avellana</h3>
+        <p class="desc">Nutrición prebiótica con aroma dulce y cálido.</p>
+        <div class="content">400 ml</div>
+        <div class="price-row"><span class="price">S/ 45<small>.00</small></span></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- 3. CUIDADO PERSONAL / DESODORANTE -->
+<section class="category section-daily">
+  <div class="category-band">
+    <span class="num">03</span>
+    <h2>Cuidado Personal</h2>
+    <span class="count">2 productos</span>
+  </div>
+  <div class="grid">
+
+    <div class="card">
+      <div class="photo"><img src="fotos/tododia-ciruela-vainilla.jpg" alt="Desodorante Ciruela y Vainilla"></div>
+      <div class="info">
+        <span class="line-tag">Natura · Tododia</span>
+        <h3>Desodorante Roll-on Ciruela y Flor de Vainilla</h3>
+        <p class="desc">72h de protección con acción prebiótica.</p>
+        <div class="content">70 ml</div>
+        <div class="price-row"><span class="price">S/ 25<small>.00</small></span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="photo"><img src="fotos/tododia-piel-uniforme.jpg" alt="Desodorante Piel Uniforme"></div>
+      <div class="info">
+        <span class="line-tag">Natura · Tododia</span>
+        <h3>Desodorante Roll-on Piel Uniforme</h3>
+        <p class="desc">Previene el oscurecimiento irregular de la piel.</p>
+        <div class="content">70 ml</div>
+        <div class="price-row"><span class="price">S/ 25<small>.00</small></span></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- 4. CUIDADO DE MANOS -->
+<section class="category section-daily">
+  <div class="category-band">
+    <span class="num">04</span>
+    <h2>Cuidado de Manos</h2>
+    <span class="count">2 productos</span>
+  </div>
+  <div class="grid">
+
+    <div class="card">
+      <div class="photo"><img src="fotos/tododia-crema-manos.jpg" alt="Crema para Manos Algodón"></div>
+      <div class="info">
+        <span class="line-tag">Natura · Tododia</span>
+        <h3>Crema para Manos Algodón</h3>
+        <p class="desc">Nutre con prebiótico, manteca de cacao y linaza.</p>
+        <div class="content">50 ml</div>
+        <div class="price-row"><span class="price">S/ 23<small>.00</small></span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="photo"><img src="fotos/pitanga.jpg" alt="Ekos Pitanga"></div>
+      <div class="info">
+        <span class="line-tag">Natura · Ekos</span>
+        <h3>Pitanga Néctar para Manos</h3>
+        <p class="desc">Frescura para la piel con activos de la Amazonía.</p>
+        <div class="content">75 g</div>
+        <div class="price-row"><span class="price">S/ 28<small>.00</small></span></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- 5. PROTECCIÓN SOLAR -->
+<section class="category section-daily">
+  <div class="category-band">
+    <span class="num">05</span>
+    <h2>Protección Solar</h2>
+    <span class="count">1 producto</span>
+  </div>
+  <div class="grid">
+
+    <div class="card">
+      <div class="photo"><img src="fotos/protector-solar.jpg" alt="Protector Solar Stick FPS50"></div>
+      <div class="info">
+        <span class="line-tag">Natura · Solar</span>
+        <h3>Protector Solar Facial Stick FPS 50</h3>
+        <p class="desc">Toque aterciopelado, resistente al agua.</p>
+        <div class="content">15 g</div>
+        <div class="price-row"><span class="price">S/ 80<small>.00</small></span></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- 6. MAQUILLAJE -->
+<section class="category section-premium">
+  <div class="category-band">
+    <span class="num">06</span>
+    <h2>Maquillaje</h2>
+    <span class="count">2 productos</span>
+  </div>
+  <div class="grid">
+
+    <div class="card">
+      <div class="photo"><img src="fotos/una-kajal.jpg" alt="Lápiz Kajal Una"></div>
+      <div class="info">
+        <span class="line-tag">Natura · Una</span>
+        <h3>Lápiz Kajal para Ojos</h3>
+        <p class="desc">Ultrapigmentado, ultracremoso y ultrasuave.</p>
+        <div class="content">1.14 g</div>
+        <div class="price-row"><span class="price">S/ 35<small>.00</small></span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="photo"><img src="fotos/una-primer.jpg" alt="Base Primer 3D Gel"></div>
+      <div class="info">
+        <span class="line-tag">Natura · Una</span>
+        <h3>Base Primer 3D Gel — Paso 1</h3>
+        <p class="desc">Tecnología Pro Color & Care, hipoalergénico.</p>
+        <div class="content">8 ml</div>
+        <div class="price-row"><span class="to-confirm">Precio a confirmar</span></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- 7. LÍNEA INFANTIL -->
+<section class="category section-kids">
+  <div class="category-band">
+    <span class="num">07</span>
+    <h2>Línea Infantil</h2>
+    <span class="count">2 productos</span>
+  </div>
+  <div class="grid">
+
+    <div class="card">
+      <div class="photo"><img src="fotos/jabon-hojitas.jpg" alt="Naturé Jabón Hojitas"></div>
+      <div class="info">
+        <span class="line-tag">Natura · Naturé</span>
+        <h3>Jabón de Tocador en Barra Hojitas</h3>
+        <p class="desc">Limpieza suave sin resecar, con óleo de babaçu.</p>
+        <div class="content">3 unidades de 90 g</div>
+        <div class="price-row"><span class="price">S/ 50<small>.00</small></span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="photo"><img src="fotos/saltar-la-cuerda.jpg" alt="Naturé Saltar la Cuerda"></div>
+      <div class="info">
+        <span class="line-tag">Natura · Naturé</span>
+        <h3>Saltar la Cuerda Agua de Colonia</h3>
+        <p class="desc">Sin alcohol, aprobado por pediatras.</p>
+        <div class="content">100 ml</div>
+        <div class="price-row"><span class="price">S/ 60<small>.00</small></span></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- 8. SETS DE REGALO -->
+<section class="category section-gift">
+  <div class="category-band">
+    <span class="num">08</span>
+    <h2>Sets de Regalo</h2>
+    <span class="count">2 productos</span>
+  </div>
+  <div class="grid">
+
+    <div class="card">
+      <div class="badge">Edición Limitada</div>
+      <div class="photo"><img src="fotos/tododia-pack.jpg" alt="Caja de Regalo Tododia"></div>
+      <div class="info">
+        <span class="line-tag">Natura · Tododia</span>
+        <h3>Caja de Regalo Tododia</h3>
+        <p class="desc">Estuche de regalo para tu ritual de belleza favorito.</p>
+        <div class="content">1 unidad</div>
+        <div class="price-row"><span class="to-confirm">Precio a confirmar</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="photo" style="background:var(--bg-soft); color:#bbb; font-size:12px; text-align:center;">Foto pendiente</div>
+      <div class="info">
+        <span class="line-tag">Natura · Tododia</span>
+        <h3>Segunda Caja de Regalo</h3>
+        <p class="desc">Agrega la foto a la carpeta FOTOS y actualiza esta tarjeta.</p>
+        <div class="content">1 unidad</div>
+        <div class="price-row"><span class="to-confirm">Precio a confirmar</span></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  Natura · hace bien, estar bien — Catálogo de campaña
+</footer>
+
+</body>
+</html>
