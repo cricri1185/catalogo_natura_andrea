@@ -34,85 +34,92 @@
   }
 
   *{box-sizing:border-box; margin:0; padding:0;}
+  html{ -webkit-text-size-adjust:100%; }
   body{
     font-family:'Poppins', sans-serif;
     background:var(--bg);
     color:var(--ink-soft);
     -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+    width:100%;
   }
+  img{ display:block; }
 
   .display{ font-family:'Playfair Display', serif; }
 
   /* ===== PORTADA ===== */
   .cover{
-    min-height:70vh;
+    min-height:60vh;
     display:flex;
     flex-direction:column;
     align-items:center;
     justify-content:center;
     text-align:center;
     background:linear-gradient(180deg, #FFFFFF 0%, #F7F7F7 100%);
-    padding:80px 24px;
+    padding:64px 24px;
   }
   .cover .eyebrow{
-    letter-spacing:.35em;
-    font-size:12px;
+    letter-spacing:.3em;
+    font-size:clamp(10px,2.6vw,12px);
     font-weight:600;
     color:var(--accent-orange);
     text-transform:uppercase;
     margin-bottom:18px;
   }
   .cover h1{
-    font-size:clamp(40px,7vw,84px);
+    font-size:clamp(34px,9vw,84px);
     font-weight:400;
     font-style:italic;
     color:var(--ink);
-    line-height:1.05;
+    line-height:1.1;
   }
   .cover p{
     margin-top:22px;
-    font-size:16px;
+    font-size:clamp(13px,3.6vw,16px);
     color:var(--ink-soft);
     max-width:420px;
+    padding:0 8px;
   }
 
   /* ===== CINTILLO DE CATEGORÍA ===== */
   .category{
-    padding:64px 6vw 24px;
+    padding:56px 5vw 24px;
   }
   .category-band{
     display:flex;
+    flex-wrap:wrap;
     align-items:baseline;
-    gap:16px;
+    gap:10px 16px;
     border-bottom:2px solid var(--ink);
     padding-bottom:14px;
-    margin-bottom:40px;
+    margin-bottom:32px;
   }
   .category-band .num{
     font-family:'Playfair Display', serif;
     font-style:italic;
-    font-size:22px;
+    font-size:clamp(18px,4vw,22px);
     color:var(--accent-orange);
   }
   .category-band h2{
-    font-size:clamp(22px,3vw,32px);
-    letter-spacing:.06em;
+    font-size:clamp(18px,4.2vw,32px);
+    letter-spacing:.05em;
     text-transform:uppercase;
     font-weight:700;
     color:var(--ink);
   }
   .category-band .count{
     margin-left:auto;
-    font-size:12px;
+    font-size:11px;
     color:#999;
-    letter-spacing:.1em;
+    letter-spacing:.08em;
+    white-space:nowrap;
   }
 
   /* ===== GRID DE PRODUCTOS ===== */
   .grid{
     display:grid;
     grid-template-columns:repeat(auto-fill, minmax(230px,1fr));
-    gap:28px;
+    gap:24px;
     padding-bottom:16px;
   }
 
@@ -124,6 +131,7 @@
     flex-direction:column;
     transition:transform .25s ease, box-shadow .25s ease;
     position:relative;
+    min-width:0;
   }
   .card:hover{
     transform:translateY(-4px);
@@ -132,16 +140,17 @@
 
   .card .badge{
     position:absolute;
-    top:12px; left:12px;
+    top:10px; left:10px;
     background:var(--accent-coral);
     color:#fff;
-    font-size:10px;
+    font-size:9px;
     font-weight:700;
-    letter-spacing:.08em;
+    letter-spacing:.06em;
     text-transform:uppercase;
-    padding:5px 10px;
+    padding:5px 9px;
     border-radius:2px;
     z-index:2;
+    max-width:calc(100% - 20px);
   }
 
   .card .photo{
@@ -150,50 +159,57 @@
     display:flex;
     align-items:center;
     justify-content:center;
-    padding:18px;
+    padding:14px;
   }
   .card .photo img{
     max-width:100%;
     max-height:100%;
+    width:auto;
+    height:auto;
     object-fit:contain;
     mix-blend-mode:multiply;
   }
 
   .card .info{
-    padding:18px 18px 20px;
+    padding:14px 14px 16px;
     display:flex;
     flex-direction:column;
     gap:6px;
     flex:1;
+    min-width:0;
   }
   .card .line-tag{
     font-size:10px;
-    letter-spacing:.14em;
+    letter-spacing:.12em;
     text-transform:uppercase;
     font-weight:600;
     color:var(--accent-orange);
+    overflow-wrap:break-word;
   }
   .card h3{
-    font-size:17px;
+    font-size:clamp(14px,3.6vw,17px);
     font-weight:600;
     color:var(--ink);
     line-height:1.25;
+    overflow-wrap:break-word;
   }
   .card .desc{
     font-size:12px;
     color:#666;
     line-height:1.4;
     flex:1;
+    overflow-wrap:break-word;
   }
 
   .price-row{
-    margin-top:10px;
+    margin-top:8px;
     display:flex;
     align-items:baseline;
-    gap:8px;
+    flex-wrap:wrap;
+    gap:6px 8px;
   }
   .price-row .price{
-    font-size:22px;
+    font-size:clamp(17px,4.4vw,22px);
     font-weight:800;
     color:var(--ink);
   }
@@ -202,14 +218,14 @@
     font-weight:500;
   }
   .price-row .to-confirm{
-    font-size:13px;
+    font-size:12px;
     font-style:italic;
     color:#999;
   }
   .content{
     font-size:11px;
     color:#999;
-    letter-spacing:.04em;
+    letter-spacing:.03em;
     margin-top:2px;
   }
 
@@ -240,11 +256,28 @@
     letter-spacing:.08em;
   }
 
+  @media (max-width:900px){
+    .grid{grid-template-columns:repeat(auto-fill, minmax(200px,1fr)); gap:20px;}
+  }
+
   @media (max-width:640px){
-    .category{padding:40px 5vw 16px;}
-    .grid{grid-template-columns:repeat(auto-fill, minmax(150px,1fr)); gap:16px;}
-    .card h3{font-size:15px;}
-    .price-row .price{font-size:18px;}
+    .cover{padding:48px 20px; min-height:50vh;}
+    .category{padding:36px 16px 12px;}
+    .category-band{margin-bottom:24px; padding-bottom:10px;}
+    .grid{grid-template-columns:repeat(2, 1fr); gap:12px;}
+    .card .info{padding:10px 10px 12px; gap:4px;}
+    .card .photo{padding:10px;}
+    .card .desc{font-size:10.5px;}
+    .content{font-size:9.5px;}
+    footer{padding:40px 20px; font-size:11px;}
+  }
+
+  @media (max-width:380px){
+    .cover h1{line-height:1.15;}
+    .category{padding:28px 12px 8px;}
+    .grid{gap:10px;}
+    .card .info{padding:8px 8px 10px;}
+    .card .desc{display:none;}
   }
 </style>
 </head>
@@ -565,7 +598,7 @@
   <div class="category-band">
     <span class="num">08</span>
     <h2>Sets de Regalo</h2>
-    <span class="count">2 productos</span>
+    <span class="count">1 producto</span>
   </div>
   <div class="grid">
 
@@ -581,14 +614,81 @@
       </div>
     </div>
 
+  </div>
+</section>
+
+<!-- 9. HOGAR Y ACCESORIOS -->
+<section class="category section-daily">
+  <div class="category-band">
+    <span class="num">09</span>
+    <h2>Hogar y Accesorios</h2>
+    <span class="count">6 productos</span>
+  </div>
+  <div class="grid">
+
     <div class="card">
-      <div class="photo" style="background:var(--bg-soft); color:#bbb; font-size:12px; text-align:center;">Foto pendiente</div>
+      <div class="photo"><img src="fotos/mochila-verde.jpg" alt="Mochila Verde"></div>
       <div class="info">
-        <span class="line-tag">Natura · Tododia</span>
-        <h3>Segunda Caja de Regalo</h3>
-        <p class="desc">Agrega la foto a la carpeta FOTOS y actualiza esta tarjeta.</p>
+        <span class="line-tag">Natura · Consultoría de Belleza</span>
+        <h3>Mochila Verde</h3>
+        <p class="desc">Diseño tipo sobre en cuero ecológico, correas ajustables.</p>
         <div class="content">1 unidad</div>
-        <div class="price-row"><span class="to-confirm">Precio a confirmar</span></div>
+        <div class="price-row"><span class="price">S/ 85<small>.00</small></span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="photo"><img src="fotos/mochila-azul.jpg" alt="Mochila Azul"></div>
+      <div class="info">
+        <span class="line-tag">Natura Avon · Consultoría</span>
+        <h3>Mochila Azul Natura</h3>
+        <p class="desc">Estilo urbano en tela resistente con detalles en cuero.</p>
+        <div class="content">1 unidad</div>
+        <div class="price-row"><span class="price">S/ 60<small>.00</small></span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="photo"><img src="fotos/cartera-negra.jpg" alt="Cartera Natura"></div>
+      <div class="info">
+        <span class="line-tag">Natura</span>
+        <h3>Cartera Natura</h3>
+        <p class="desc">Tote bag negra con asas y solapa en contraste camel.</p>
+        <div class="content">1 unidad</div>
+        <div class="price-row"><span class="price">S/ 70<small>.00</small></span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="photo"><img src="fotos/set-sartenes.jpg" alt="Set de Sartenes"></div>
+      <div class="info">
+        <span class="line-tag">Hogar</span>
+        <h3>Set x2 Sartenes</h3>
+        <p class="desc">Antiadherentes, mango ergonómico, aptas para todo tipo de cocina.</p>
+        <div class="content">18 cm y 22 cm</div>
+        <div class="price-row"><span class="price">S/ 75<small>.00</small></span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="photo"><img src="fotos/set-cuchillos.jpg" alt="Set de Cuchillos"></div>
+      <div class="info">
+        <span class="line-tag">Hogar</span>
+        <h3>Set x5 Cuchillos</h3>
+        <p class="desc">Acero inoxidable con mango de madera, incluye tabla.</p>
+        <div class="content">Set de 5 piezas</div>
+        <div class="price-row"><span class="price">S/ 70<small>.00</small></span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="photo"><img src="fotos/cobija-personal.jpg" alt="Cobija Personal"></div>
+      <div class="info">
+        <span class="line-tag">Hogar</span>
+        <h3>Cobija Personal</h3>
+        <p class="desc">Suave y ligera, ideal para el día a día.</p>
+        <div class="content">127 x 152 cm</div>
+        <div class="price-row"><span class="price">S/ 40<small>.00</small></span></div>
       </div>
     </div>
 
